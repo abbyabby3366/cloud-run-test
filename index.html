@@ -52,6 +52,12 @@
     <div class="container">
         <h1>Hello from Cloud Run!</h1>
         <p>Your Express.js server is successfully serving this HTML file.</p>
+        <p style="margin-top: 1.5rem; font-weight: 500; color: #818cf8;">
+            Secret Phrase: <span style="color: #f8fafc;">{{SECRET_PHRASE}}</span>
+        </p>
+        <div style="margin-top: 2rem;">
+            <a href="/about" style="color: #38bdf8; text-decoration: none; font-weight: 600;">Go to About Page →</a>
+        </div>
         <div class="status">● Server Online</div>
     </div>
 </body>
