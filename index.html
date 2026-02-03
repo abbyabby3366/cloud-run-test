@@ -55,10 +55,34 @@
         <p style="margin-top: 1.5rem; font-weight: 500; color: #818cf8;">
             Secret Phrase: <span style="color: #f8fafc;">{{SECRET_PHRASE}}</span>
         </p>
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+            <button onclick="triggerLog('error')" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Error</button>
+            <button onclick="triggerLog('warn')" style="background: #f59e0b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Warning</button>
+            <button onclick="triggerLog('info')" style="background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Info</button>
+            <button onclick="triggerLog('success')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Success</button>
+        </div>
+
+        <div id="log-status" style="margin-top: 1rem; font-size: 0.875rem; color: #94a3b8; height: 1.2rem;"></div>
+
         <div style="margin-top: 2rem;">
             <a href="/about" style="color: #38bdf8; text-decoration: none; font-weight: 600;">Go to About Page →</a>
         </div>
         <div class="status">● Server Online</div>
     </div>
+
+    <script>
+        async function triggerLog(type) {
+            const statusDiv = document.getElementById('log-status');
+            statusDiv.innerText = `Sending ${type} request...`;
+            try {
+                const response = await fetch(`/log/${type}`);
+                const data = await response.json();
+                statusDiv.innerText = `Server response: ${data.status}`;
+                setTimeout(() => { if(statusDiv.innerText.includes(data.status)) statusDiv.innerText = ''; }, 3000);
+            } catch (err) {
+                statusDiv.innerText = 'Failed to contact server';
+            }
+        }
+    </script>
 </body>
 </html>
