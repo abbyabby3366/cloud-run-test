@@ -5,9 +5,20 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 8080;
 
+// Helper for Google Cloud Structured Logging
+const cloudLog = (severity, message) => {
+  const logEntry = {
+    severity: severity.toUpperCase(),
+    message: message,
+    component: "cloud-run-demo",
+    time: new Date().toISOString()
+  };
+  console.log(JSON.stringify(logEntry));
+};
+
 // Middleware to log every visit
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Visit from ${req.ip}`);
+  cloudLog('INFO', `${req.method} ${req.url} - Visit from ${req.ip}`);
   next();
 });
 
@@ -24,24 +35,39 @@ app.get('/', (req, res) => {
 });
 
 // Debug Logging Endpoints
+app.get('/log/emergency', (req, res) => {
+  cloudLog('EMERGENCY', '🚨 SYSTEM DOWN! This is an Emergency log.');
+  res.json({ status: 'Emergency logged to server' });
+});
+
+app.get('/log/alert', (req, res) => {
+  cloudLog('ALERT', '🔔 Action required: Alerting developers.');
+  res.json({ status: 'Alert logged to server' });
+});
+
+app.get('/log/critical', (req, res) => {
+  cloudLog('CRITICAL', '⚠️ CRITICAL: Core component failure.');
+  res.json({ status: 'Critical log sent' });
+});
+
 app.get('/log/error', (req, res) => {
-  console.error('CRITICAL: Manual error triggered from UI!');
-  res.json({ status: 'Error logged to server console' });
+  cloudLog('ERROR', '❌ Just a standard Error log.');
+  res.json({ status: 'Error logged' });
 });
 
 app.get('/log/warn', (req, res) => {
-  console.warn('WARNING: Manual warning triggered from UI.');
-  res.json({ status: 'Warning logged to server console' });
+  cloudLog('WARNING', '⚠️ Warning: Unexpected input received.');
+  res.json({ status: 'Warning logged' });
 });
 
 app.get('/log/info', (req, res) => {
-  console.info('INFO: Manual info log triggered from UI.');
-  res.json({ status: 'Info logged to server console' });
+  cloudLog('INFO', 'ℹ️ Basic Info log.');
+  res.json({ status: 'Info logged' });
 });
 
 app.get('/log/success', (req, res) => {
-  console.log('✅ SUCCESS: Everything is running perfectly.');
-  res.json({ status: 'Success message logged' });
+  cloudLog('NOTICE', '✅ Everything is running perfectly.');
+  res.json({ status: 'Notice logged' });
 });
 
 app.get('/about', (req, res) => {

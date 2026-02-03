@@ -56,10 +56,13 @@
             Secret Phrase: <span style="color: #f8fafc;">{{SECRET_PHRASE}}</span>
         </p>
         <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-            <button onclick="triggerLog('error')" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Error</button>
-            <button onclick="triggerLog('warn')" style="background: #f59e0b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Warning</button>
-            <button onclick="triggerLog('info')" style="background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Info</button>
-            <button onclick="triggerLog('success')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Trigger Success</button>
+            <button onclick="triggerLog('emergency')" style="background: #991b1b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Emergency</button>
+            <button onclick="triggerLog('alert')" style="background: #b91c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Alert</button>
+            <button onclick="triggerLog('critical')" style="background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Critical</button>
+            <button onclick="triggerLog('error')" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Error</button>
+            <button onclick="triggerLog('warn')" style="background: #f59e0b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Warning</button>
+            <button onclick="triggerLog('info')" style="background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Info</button>
+            <button onclick="triggerLog('success')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Success</button>
         </div>
 
         <div id="log-status" style="margin-top: 1rem; font-size: 0.875rem; color: #94a3b8; height: 1.2rem;"></div>
